@@ -1,0 +1,5 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< com.payment:payment-backend >---------------------
+[INFO] Building payment-backend 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------

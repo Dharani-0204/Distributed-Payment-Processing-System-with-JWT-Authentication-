@@ -1,0 +1,596 @@
+/* ═══════════════════════════════════════════════════════
+   Payment Wallet Dashboard — Premium Fintech UI
+   ═══════════════════════════════════════════════════════ */
+
+/* ─── Root & Variables ─── */
+:root {
+  --blue-primary: #1a73e8;
+  --purple-primary: #7c3aed;
+  --teal-primary: #0d9488;
+  --green-primary: #059669;
+  --red-primary: #dc2626;
+  --orange-primary: #d97706;
+
+  --bg-page: #f0f4f8;
+  --bg-card: #ffffff;
+  --navbar-bg: #1e3a5f;
+
+  --text-dark: #1e293b;
+  --text-mid: #475569;
+  --text-light: #94a3b8;
+
+  --border: #e2e8f0;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Root Container ─── */
+.pw-root {
+  min-height: 100vh;
+  background: var(--bg-page);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: var(--text-dark);
+}
+
+/* ═══ NAVBAR ══════════════════════════════════════════ */
+.pw-navbar {
+  background: var(--navbar-bg);
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pw-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+}
+
+.pw-brand-icon { font-size: 1.4rem; }
+
+.pw-brand-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.pw-nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.pw-nav-link {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.pw-nav-link.active,
+.pw-nav-link:hover {
+  color: #fff;
+  border-bottom-color: #60a5fa;
+}
+
+.pw-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pw-logout-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.85);
+  padding: 0.35rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.pw-logout-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.pw-user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  position: relative; /* For dropdown positioning */
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.pw-user-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ─── Profile Dropdown ─── */
+.pw-profile-dropdown {
+  position: absolute;
+  top: Calc(100% + 5px);
+  right: 0;
+  width: 220px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  border: 1px solid var(--border);
+  padding: 0.5rem 0;
+  z-index: 200;
+  animation: dropdownFade 0.2s ease-out;
+  color: var(--text-dark);
+}
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pw-dropdown-header {
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.pw-dropdown-header strong {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.pw-dropdown-header span {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.pw-dropdown-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.4rem 0;
+}
+
+.pw-dropdown-item {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+.pw-dropdown-item:hover {
+  background: #f1f5f9;
+  color: var(--blue-primary);
+}
+
+.pw-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+}
+
+/* ═══ MAIN CONTENT ════════════════════════════════════ */
+.pw-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ═══ STAT CARDS ROW ══════════════════════════════════ */
+.pw-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.pw-stat-card {
+  border-radius: var(--radius);
+  padding: 1.5rem 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  box-shadow: var(--shadow);
+  animation: slideUp 0.4s ease-out;
+}
+
+.stat-balance {
+  background: linear-gradient(135deg, #0d9488 0%, #0891b2 100%);
+}
+
+.stat-sent {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+}
+
+.stat-received {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+}
+
+.stat-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  opacity: 0.6;
+}
+
+/* ═══ FORMS ROW ═══════════════════════════════════════ */
+.pw-forms-row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 1.5rem;
+}
+
+.pw-form-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.form-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.pw-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.pw-input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.pw-input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  background: #f8fafc;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.pw-input:focus {
+  outline: none;
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.12);
+  background: #fff;
+}
+
+.pw-input::placeholder { color: var(--text-light); }
+
+/* Buttons */
+.pw-btn {
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.pw-btn-blue {
+  background: var(--blue-primary);
+  color: #fff;
+}
+
+.pw-btn-blue:hover:not(:disabled) {
+  background: #1558c0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.35);
+}
+
+.pw-btn-purple {
+  background: var(--purple-primary);
+  color: #fff;
+}
+
+.pw-btn-purple:hover:not(:disabled) {
+  background: #6d28d9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+}
+
+.pw-btn-icon {
+  background: #f1f5f9;
+  color: var(--text-mid);
+  border: 1.5px solid var(--border);
+  padding: 0.65rem;
+  width: auto;
+  font-size: 1rem;
+}
+
+.pw-btn-icon:hover { background: #e2e8f0; }
+
+.pw-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Form feedback */
+.form-error {
+  color: var(--red-primary);
+  font-size: 0.83rem;
+  padding: 0.5rem 0.8rem;
+  background: rgba(220, 38, 38, 0.06);
+  border-radius: 6px;
+  border-left: 3px solid var(--red-primary);
+}
+
+.form-success {
+  color: var(--green-primary);
+  font-size: 0.83rem;
+  padding: 0.5rem 0.8rem;
+  background: rgba(5, 150, 105, 0.06);
+  border-radius: 6px;
+  border-left: 3px solid var(--green-primary);
+}
+
+/* ═══ TRANSACTION HISTORY ═════════════════════════════ */
+.pw-history-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.history-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.icon-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  transition: all 0.2s;
+}
+
+.icon-btn:hover { background: #f1f5f9; }
+
+/* Filter tabs */
+.tx-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-right: 0.25rem;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.filter-btn:hover { color: var(--text-dark); }
+
+.filter-btn.filter-active {
+  color: var(--blue-primary);
+  font-weight: 700;
+}
+
+.filter-btn:not(:last-child)::after {
+  content: '|';
+  position: absolute;
+  right: -4px;
+  color: var(--border);
+}
+
+/* Transaction list */
+.tx-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.tx-empty {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-light);
+}
+
+.tx-empty span { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+
+/* ─── Transaction Row ─── */
+.tx-row {
+  display: grid;
+  grid-template-columns: 44px 1fr auto auto auto auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.15s;
+  border-radius: 8px;
+}
+
+.tx-row:hover { background: #f8fafc; }
+.tx-row:last-child { border-bottom: none; }
+
+/* Direction icon circle */
+.tx-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.icon-green { background: #d1fae5; color: #059669; }
+.icon-red   { background: #fee2e2; color: #dc2626; }
+.icon-orange{ background: #fef3c7; color: #d97706; }
+
+/* Label column */
+.tx-label-col { min-width: 0; }
+.tx-label {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Amount */
+.tx-amount-col {
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.amount-in  { color: #059669; }
+.amount-out { color: #dc2626; }
+
+/* Status badge */
+.tx-status-col { display: flex; justify-content: center; min-width: 80px; }
+
+.badge {
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.badge-success { background: #d1fae5; color: #065f46; }
+.badge-failed  { background: #fee2e2; color: #991b1b; }
+.badge-pending { background: #fef3c7; color: #92400e; }
+
+/* Ref ID */
+.tx-ref-col {
+  font-size: 0.8rem;
+  color: var(--text-mid);
+  white-space: nowrap;
+  font-family: 'Courier New', monospace;
+}
+
+/* Time */
+.tx-time-col {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* ═══ RESPONSIVE ══════════════════════════════════════ */
+@media (max-width: 900px) {
+  .pw-stats-row { grid-template-columns: 1fr 1fr; }
+  .pw-forms-row { grid-template-columns: 1fr; }
+  .stat-received { grid-column: span 2; }
+}
+
+@media (max-width: 700px) {
+  .pw-content { padding: 1rem; }
+  .pw-stats-row { grid-template-columns: 1fr; }
+  .stat-received { grid-column: auto; }
+  .pw-nav-links { display: none; }
+  .tx-row {
+    grid-template-columns: 40px 1fr auto;
+    grid-template-rows: auto auto;
+  }
+  .tx-status-col, .tx-ref-col, .tx-time-col {
+    display: none;
+  }
+  .tx-amount-col { font-size: 0.9rem; }
+  .stat-value { font-size: 1.5rem; }
+}
+
+/* ─── Animations ─── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pw-history-card { animation: slideUp 0.4s ease-out 0.15s both; }
+.pw-forms-row    { animation: slideUp 0.4s ease-out 0.1s both; }
